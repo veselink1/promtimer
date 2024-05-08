@@ -51,4 +51,4 @@ ENV PROM_BIN=/usr/bin/prometheus
 
 WORKDIR /promtimer/data
 EXPOSE 13300/tcp
-ENTRYPOINT ["/promtimer/promtimer/promtimer.py"]
+ENTRYPOINT ["/promtimer/bin/promtimer"]

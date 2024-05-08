@@ -21,7 +21,7 @@ import datetime
 import re
 
 # local imports
-import util
+from . import util
 
 FILENAME = 'events.log'
 HEADERS = {

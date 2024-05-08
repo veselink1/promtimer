@@ -23,7 +23,7 @@ import zipfile
 import logging
 
 # Local Imports
-import cbstats
+from . import cbstats
 
 
 def handle_backup_archive_mode(backup_archive_path: str,

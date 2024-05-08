@@ -30,7 +30,7 @@ from http.client import HTTPException
 from abc import ABC, abstractmethod
 
 # Local Imports
-import util
+from . import util
 
 COUCHBASE_LOG = 'couchbase.log'
 DIAG_LOG = 'diag.log'

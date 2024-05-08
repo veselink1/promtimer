@@ -28,12 +28,12 @@ import logging
 import hashlib
 
 # Local Imports
-import annotations
-import backupstats
-import cbstats
-import dashboard
-import templating
-import util
+from . import annotations
+from . import backupstats
+from . import cbstats
+from . import dashboard
+from . import templating
+from . import util
 
 PROMETHEUS_BIN = os.environ.get('PROM_BIN', 'prometheus')
 PROMTIMER_DIR = '.promtimer'

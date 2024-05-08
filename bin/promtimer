@@ -2,4 +2,4 @@
 
 PROMTIMER_DIR="$(dirname "$0")/.."
 export PROMTIMER_DIR
-exec "$PROMTIMER_DIR/promtimer/promtimer.py" $@
+(cd "$PROMTIMER_DIR" && /usr/bin/env python3 -m promtimer $@)

@@ -19,8 +19,8 @@ import json
 import logging
 
 # Local Imports
-import util
-import templating
+from . import util
+from . import templating
 
 
 def get_template(name):
