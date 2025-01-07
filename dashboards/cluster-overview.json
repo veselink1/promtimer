@@ -1,6 +1,23 @@
 {
   "title": "Cluster Overview",
   "_base": "dashboard",
+  "templating": {
+    "list": [
+      {
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "node",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
+  },
   "annotations": {
     "list": [
       {
@@ -39,9 +56,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sys_cpu_utilization_rate",
-          "legendFormat": "{data-source-name} sys_cpu_utilization_rate",
+          "legendFormat": "${node:text} sys_cpu_utilization_rate",
           "_base": "target"
         }
       ],
@@ -65,15 +82,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sys_mem_limit",
-          "legendFormat": "{data-source-name} {{name}}",
+          "legendFormat": "${node:text} {{name}}",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sys_mem_actual_used",
-          "legendFormat": "{data-source-name} {{name}}",
+          "legendFormat": "${node:text} {{name}}",
           "_base": "target"
         }
       ],
@@ -97,9 +114,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sys_mem_free",
-          "legendFormat": "{data-source-name} sys_mem_free",
+          "legendFormat": "${node:text} sys_mem_free",
           "_base": "target"
         }
       ],
@@ -123,9 +140,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ops[1m]))",
-          "legendFormat": "{data-source-name} sum(irate(kv_ops[1m]))",
+          "legendFormat": "${node:text} sum(irate(kv_ops[1m]))",
           "_base": "target"
         }
       ],
@@ -149,15 +166,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ops{op=\"get\"}[1m]))",
-          "legendFormat": "{data-source-name} sum(irate(kv_ops{op=get}[1m]))",
+          "legendFormat": "${node:text} sum(irate(kv_ops{op=get}[1m]))",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ops{op=~\"set|set_meta|set_ret_meta|cas|decr|del_meta|del_ret_meta|incr|delete\"}[1m]))",
-          "legendFormat": "{data-source-name} sum(irate(kv_ops{op=~set|set_meta|cas|delete|...}[1m]))",
+          "legendFormat": "${node:text} sum(irate(kv_ops{op=~set|set_meta|cas|delete|...}[1m]))",
           "_base": "target"
         }
       ],
@@ -181,9 +198,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(kv_mem_used_bytes)",
-          "legendFormat": "{data-source-name} sum(kv_mem_used_bytes)",
+          "legendFormat": "${node:text} sum(kv_mem_used_bytes)",
           "_base": "target"
         }
       ],
@@ -207,9 +224,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(n1ql_requests[1m])",
-          "legendFormat": "{data-source-name} {{name}}",
+          "legendFormat": "${node:text} {{name}}",
           "_base": "target"
         }
       ],
@@ -233,21 +250,21 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(n1ql_selects[1m])",
-          "legendFormat": "{data-source-name} {{name}}",
+          "legendFormat": "${node:text} {{name}}",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(n1ql_updates[1m])",
-          "legendFormat": "{data-source-name} {{name}}",
+          "legendFormat": "${node:text} {{name}}",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(n1ql_inserts[1m])",
-          "legendFormat": "{data-source-name} {{name}}",
+          "legendFormat": "${node:text} {{name}}",
           "_base": "target"
         }
       ],
@@ -271,9 +288,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(index_items_count)",
-          "legendFormat": "{data-source-name} sum(index_items_count)",
+          "legendFormat": "${node:text} sum(index_items_count)",
           "_base": "target"
         }
       ],
@@ -297,9 +314,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(index_num_rows_scanned[1m]))",
-          "legendFormat": "{data-source-name} sum(irate(index_num_rows_scanned[1m]))",
+          "legendFormat": "${node:text} sum(irate(index_num_rows_scanned[1m]))",
           "_base": "target"
         }
       ],
@@ -323,9 +340,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(index_memory_used)",
-          "legendFormat": "{data-source-name} sum(index_memory_used)",
+          "legendFormat": "${node:text} sum(index_memory_used)",
           "_base": "target"
         }
       ],
@@ -349,9 +366,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(couch_docs_actual_disk_size)",
-          "legendFormat": "{data-source-name} sum(couch_docs_actual_disk_size)",
+          "legendFormat": "${node:text} sum(couch_docs_actual_disk_size)",
           "_base": "target"
         }
       ],

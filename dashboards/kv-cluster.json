@@ -1,6 +1,23 @@
 {
   "_base": "dashboard",
   "title": "KV View - Cluster",
+  "templating": {
+    "list": [
+      {
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "node",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
+  },
   "annotations": {
     "list": [
       {
@@ -72,9 +89,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sysproc_cpu_utilization{proc=\"memcached\"}",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -99,9 +116,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_uptime_seconds",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -126,9 +143,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sysproc_mem_resident{proc=\"memcached\"}",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -152,9 +169,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(couch_docs_actual_disk_size)",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -181,9 +198,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ops[1m]))",
-          "legendFormat": "{data-source-name} {sum(irate(kv_ops[1m]))",
+          "legendFormat": "${node:text} {sum(irate(kv_ops[1m]))",
           "_base": "target"
         }
       ],
@@ -208,15 +225,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ops{op=\"get\"}[1m]))",
-          "legendFormat": "{data-source-name} GETS",
+          "legendFormat": "${node:text} GETS",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ops{op=~\"set|set_meta|set_ret_meta|cas|decr|del_meta|del_ret_meta|incr|delete\"}[1m]))",
-          "legendFormat": "{data-source-name} MUTATIONS",
+          "legendFormat": "${node:text} MUTATIONS",
           "_base": "target"
         }
       ],
@@ -241,9 +258,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(irate(kv_ep_bg_fetched[5m]))",
-          "legendFormat": "{data-source-name} BG Fetches",
+          "legendFormat": "${node:text} BG Fetches",
           "_base": "target"
         }
       ],
@@ -268,21 +285,21 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.99, sum by (le) (irate(kv_cmd_duration_seconds_bucket{opcode=~\"GET|GAT\"}[10m])))",
-          "legendFormat": "99th {data-source-name} GET/GAT",
+          "legendFormat": "99th ${node:text} GET/GAT",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.90, sum by (le) (irate(kv_cmd_duration_seconds_bucket{opcode=~\"GET|GAT\"}[10m])))",
-          "legendFormat": "90th {data-source-name} GET/GAT",
+          "legendFormat": "90th ${node:text} GET/GAT",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.50, sum by (le) (irate(kv_cmd_duration_seconds_bucket{opcode=~\"GET|GAT\"}[10m])))",
-          "legendFormat": "50th {data-source-name} GET/GAT",
+          "legendFormat": "50th ${node:text} GET/GAT",
           "_base": "target"
         }
       ],
@@ -307,15 +324,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.99,irate(kv_sync_write_commit_duration_seconds_bucket{level=\"persist_to_majority\"}[5m]))",
-          "legendFormat": "99th {data-source-name} Sync SET",
+          "legendFormat": "99th ${node:text} Sync SET",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.50,irate(kv_sync_write_commit_duration_seconds_bucket{level=\"persist_to_majority\"}[5m]))",
-          "legendFormat": "50th {data-source-name} Sync SET",
+          "legendFormat": "50th ${node:text} Sync SET",
           "_base": "target"
         }
       ],
@@ -340,15 +357,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.99, sum by (le) (irate(kv_cmd_duration_seconds_bucket{opcode=\"SET\"}[10m])))",
-          "legendFormat": "99th {data-source-name} Sync SET",
+          "legendFormat": "99th ${node:text} Sync SET",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "histogram_quantile(0.50, sum by (le) (irate(kv_cmd_duration_seconds_bucket{opcode=\"SET\"}[10m])))",
-          "legendFormat": "50th {data-source-name} Sync SET",
+          "legendFormat": "50th ${node:text} Sync SET",
           "_base": "target"
         }
       ],
@@ -377,9 +394,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(kv_ep_total_enqueued[5m])",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -404,15 +421,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(kv_ep_total_deduplicated[5m])",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(kv_ep_total_deduplicated_flusher[5m])",
-          "legendFormat": "{data-source-name}:flusher",
+          "legendFormat": "${node:text}:flusher",
           "_base": "target"
         }
       ],
@@ -437,15 +454,15 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_ep_db_data_size_bytes",
-          "legendFormat": "{data-source-name}:db_data_size",
+          "legendFormat": "${node:text}:db_data_size",
           "_base": "target"
         },
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_ep_magma_logical_data_size_bytes",
-          "legendFormat": "{data-source-name}:magma_logical_data_size",
+          "legendFormat": "${node:text}:magma_logical_data_size",
           "_base": "target"
         }
       ],
@@ -470,9 +487,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_ep_magma_history_logical_data_size_bytes",
-          "legendFormat": "{data-source-name}:history_size",
+          "legendFormat": "${node:text}:history_size",
           "_base": "target"
         }
       ],
@@ -497,9 +514,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_ep_magma_history_logical_disk_size_bytes",
-          "legendFormat": "{data-source-name}:history_size",
+          "legendFormat": "${node:text}:history_size",
           "_base": "target"
         }
       ],
@@ -524,9 +541,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_ep_db_history_file_size_bytes",
-          "legendFormat": "{data-source-name}:history_size",
+          "legendFormat": "${node:text}:history_size",
           "_base": "target"
         }
       ],
@@ -551,9 +568,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "((kv_ep_db_file_size_bytes - on (bucket) (kv_ep_db_history_file_size_bytes or on (bucket) kv_ep_db_file_size_bytes * 0)) - on (bucket) kv_ep_db_data_size_bytes)",
-          "legendFormat": "{data-source-name}:{{bucket}}:fragmentation",
+          "legendFormat": "${node:text}:{{bucket}}:fragmentation",
           "_base": "target"
         }
       ],
@@ -578,9 +595,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "((kv_ep_db_file_size_bytes - on (bucket) (kv_ep_db_history_file_size_bytes or on (bucket) kv_ep_db_file_size_bytes * 0)) - on (bucket) kv_ep_db_data_size_bytes) / on (bucket) (kv_ep_db_file_size_bytes - on (bucket) (kv_ep_db_history_file_size_bytes or on (bucket) kv_ep_db_file_size_bytes * 0))",
-          "legendFormat": "{data-source-name}:{{bucket}}:fragmentation",
+          "legendFormat": "${node:text}:{{bucket}}:fragmentation",
           "_base": "target"
         }
       ],
@@ -609,9 +626,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_dcp_items_sent",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -636,9 +653,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(kv_dcp_items_sent[5m])",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -663,9 +680,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_dcp_total_data_size_bytes",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -690,9 +707,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "irate(kv_dcp_total_data_size_bytes[5m])",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -721,9 +738,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_total_connections",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -748,9 +765,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "sum(kv_curr_connections) + sum(kv_daemon_connections) + sum(kv_system_connections)",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -780,9 +797,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_audit_enabled",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],
@@ -808,9 +825,9 @@
       "_base": "panel",
       "_targets": [
         {
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
           "expr": "kv_audit_dropped_events",
-          "legendFormat": "{data-source-name}",
+          "legendFormat": "${node:text}",
           "_base": "target"
         }
       ],

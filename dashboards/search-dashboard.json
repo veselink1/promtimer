@@ -1,6 +1,23 @@
 {
     "title": "Search Dashboard",
     "_base": "dashboard",
+    "templating": {
+      "list": [
+        {
+          "hide": 0,
+          "includeAll": true,
+          "label": null,
+          "multi": true,
+          "name": "node",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "type": "datasource"
+        }
+      ]
+    },
   "annotations": {
     "list": [
       {
@@ -39,9 +56,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_bytes_used_ram",
-                "legendFormat": "{data-source-name} fts_num_bytes_used_ram",
+                "legendFormat": "${node:text} fts_num_bytes_used_ram",
                 "_base": "target"
               }
             ]
@@ -51,9 +68,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_bytes_used_ram_c",
-                "legendFormat": "{data-source-name} fts_num_bytes_used_ram_c",
+                "legendFormat": "${node:text} fts_num_bytes_used_ram_c",
                 "_base": "target"
               }
             ]
@@ -63,9 +80,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_curr_batches_blocked_by_herder",
-                "legendFormat": "{data-source-name} fts_curr_batches_blocked_by_herder",
+                "legendFormat": "${node:text} fts_curr_batches_blocked_by_herder",
                 "_base": "target"
               }
             ]
@@ -75,9 +92,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_tot_queryreject_on_memquota",
-                "legendFormat": "{data-source-name} fts_tot_queryreject_on_memquota",
+                "legendFormat": "${node:text} fts_tot_queryreject_on_memquota",
                 "_base": "target"
               }
             ]
@@ -87,9 +104,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_tot_grpc_queryreject_on_memquota",
-                "legendFormat": "{data-source-name} fts_tot_grpc_queryreject_on_memquota",
+                "legendFormat": "${node:text} fts_tot_grpc_queryreject_on_memquota",
                 "_base": "target"
               }
             ]
@@ -99,9 +116,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_queries_rejected_by_herder",
-                "legendFormat": "{data-source-name} fts_total_queries_rejected_by_herder",
+                "legendFormat": "${node:text} fts_total_queries_rejected_by_herder",
                 "_base": "target"
               }
             ]
@@ -111,9 +128,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_batch_bytes_added",
-                "legendFormat": "{data-source-name} fts_batch_bytes_added",
+                "legendFormat": "${node:text} fts_batch_bytes_added",
                 "_base": "target"
               }
             ]
@@ -123,9 +140,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_batch_bytes_removed",
-                "legendFormat": "{data-source-name} fts_batch_bytes_removed",
+                "legendFormat": "${node:text} fts_batch_bytes_removed",
                 "_base": "target"
               }
             ]
@@ -135,9 +152,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_batches_introduced",
-                "legendFormat": "{data-source-name} fts_num_batches_introduced",
+                "legendFormat": "${node:text} fts_num_batches_introduced",
                 "_base": "target"
               }
             ]
@@ -147,9 +164,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_files_on_disk",
-                "legendFormat": "{data-source-name} fts_num_files_on_disk",
+                "legendFormat": "${node:text} fts_num_files_on_disk",
                 "_base": "target"
               }
             ]
@@ -159,9 +176,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_pct_cpu_gc",
-                "legendFormat": "{data-source-name} fts_pct_cpu_gc",
+                "legendFormat": "${node:text} fts_pct_cpu_gc",
                 "_base": "target"
               }
             ]
@@ -171,9 +188,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_gc",
-                "legendFormat": "{data-source-name} fts_total_gc",
+                "legendFormat": "${node:text} fts_total_gc",
                 "_base": "target"
               }
             ]
@@ -183,9 +200,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_doc_count",
-                "legendFormat": "{data-source-name} fts_doc_count",
+                "legendFormat": "${node:text} fts_doc_count",
                 "_base": "target"
               }
             ]
@@ -195,9 +212,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_queries",
-                "legendFormat": "{data-source-name} fts_total_queries",
+                "legendFormat": "${node:text} fts_total_queries",
                 "_base": "target"
               }
             ]
@@ -207,9 +224,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_grpc_internal_queries",
-                "legendFormat": "{data-source-name} fts_total_grpc_internal_queries",
+                "legendFormat": "${node:text} fts_total_grpc_internal_queries",
                 "_base": "target"
               }
             ]
@@ -219,9 +236,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_queries_error",
-                "legendFormat": "{data-source-name} fts_total_queries_error",
+                "legendFormat": "${node:text} fts_total_queries_error",
                 "_base": "target"
               }
             ]
@@ -231,9 +248,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_queries_timeout",
-                "legendFormat": "{data-source-name} fts_total_queries_timeout",
+                "legendFormat": "${node:text} fts_total_queries_timeout",
                 "_base": "target"
               }
             ]
@@ -243,9 +260,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_queries_slow",
-                "legendFormat": "{data-source-name} fts_total_queries_slow",
+                "legendFormat": "${node:text} fts_total_queries_slow",
                 "_base": "target"
               }
             ]
@@ -255,9 +272,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_bytes_used_disk",
-                "legendFormat": "{data-source-name} fts_num_bytes_used_disk",
+                "legendFormat": "${node:text} fts_num_bytes_used_disk",
                 "_base": "target"
               }
             ]
@@ -267,9 +284,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_knn_search_requests",
-                "legendFormat": "{data-source-name} fts_num_knn_search_requests",
+                "legendFormat": "${node:text} fts_num_knn_search_requests",
                 "_base": "target"
               }
             ]
@@ -279,9 +296,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_knn_searches",
-                "legendFormat": "{data-source-name} fts_total_knn_searches",
+                "legendFormat": "${node:text} fts_total_knn_searches",
                 "_base": "target"
               }
             ]
@@ -291,9 +308,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_bytes_indexed",
-                "legendFormat": "{data-source-name} fts_total_bytes_indexed",
+                "legendFormat": "${node:text} fts_total_bytes_indexed",
                 "_base": "target"
               }
             ]
@@ -303,9 +320,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_mutations_to_index",
-                "legendFormat": "{data-source-name} fts_num_mutations_to_index",
+                "legendFormat": "${node:text} fts_num_mutations_to_index",
                 "_base": "target"
               }
             ]
@@ -315,9 +332,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_recs_to_persist",
-                "legendFormat": "{data-source-name} fts_num_recs_to_persist",
+                "legendFormat": "${node:text} fts_num_recs_to_persist",
                 "_base": "target"
               }
             ]
@@ -327,9 +344,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_file_merge_ops",
-                "legendFormat": "{data-source-name} fts_num_file_merge_ops",
+                "legendFormat": "${node:text} fts_num_file_merge_ops",
                 "_base": "target"
               }
             ]
@@ -339,9 +356,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_num_mem_merge_ops",
-                "legendFormat": "{data-source-name} fts_num_mem_merge_ops",
+                "legendFormat": "${node:text} fts_num_mem_merge_ops",
                 "_base": "target"
               }
             ]
@@ -351,9 +368,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_term_searchers",
-                "legendFormat": "{data-source-name} fts_total_term_searchers",
+                "legendFormat": "${node:text} fts_total_term_searchers",
                 "_base": "target"
               }
             ]
@@ -363,9 +380,9 @@
             "_base": "panel",
             "_targets": [
               {
-                "datasource": "{data-source-name}",
+                "datasource": "$node",
                 "expr": "fts_total_term_searchers_finished",
-                "legendFormat": "{data-source-name} fts_total_term_searchers_finished",
+                "legendFormat": "${node:text} fts_total_term_searchers_finished",
                 "_base": "target"
               }
             ]

@@ -57,7 +57,7 @@ Add a panel to the `_panels` attribute to your dashboard and restart Promtimer.
 
 You'll see that you're new dashboard has a single empty panel.
 
-## Add a Target Parameterized by Data-Source-Name
+## Add a Target Parameterized by Data-Source
 
 To add some time series to the panel, change the dashboard to look as follows and again restart.
 Let's also give the panel a better title:
@@ -71,9 +71,9 @@ Let's also give the panel a better title:
           "_base": "panel",
           "_targets": [
             {
-              "datasource": "{data-source-name}",
+              "datasource": "$node",
               "expr": "sys_cpu_utilization_rate",
-              "legendFormat": "{data-source-name} sys_cpu_utilization_rate",
+              "legendFormat": "${node:text} sys_cpu_utilization_rate",
               "_base": "target"
             }
           ]
@@ -82,14 +82,11 @@ Let's also give the panel a better title:
     }
 
 You will notice that the panel now contains one or more time series traces, or targets. Each target
-is the `sys_cpu_utilization_rate` for one of the cbcollects against which Promtimer is run. This
-happens because the target contains at least one instance of the Promtimer template parameter
-`{data-source-name}` which is automatically expanded by Promtimer to add one trace per data source,
-or cbcollect.
+is the `sys_cpu_utilization_rate` for one of the cbcollects against which Promtimer is run.
 
-## Make the Panel Data-Source-Name Parameterized
+## Make the Panel Data-Source Parameterized
 
-Add a data-source-name parameter to the panel, as follows:
+Use the repeat option on the panel.
 
     {
       "title": "New Dashboard",
@@ -97,13 +94,15 @@ Add a data-source-name parameter to the panel, as follows:
       "_panels": [
         {
           "title": "sys_cpu_utilization_rate",
-          "datasource": "{data-source-name}",
+          "datasource": "$node",
+          "repeat": "node",
+          "repeatDirection": "h",
+          "maxPerRow": 2,
           "_base": "panel",
           "_targets": [
             {
-              "datasource": "{data-source-name}",
               "expr": "sys_cpu_utilization_rate",
-              "legendFormat": "{data-source-name} sys_cpu_utilization_rate",
+              "legendFormat": "${node:text} sys_cpu_utilization_rate",
               "_base": "target"
             }
           ]
@@ -111,8 +110,8 @@ Add a data-source-name parameter to the panel, as follows:
       ]
     }
 
-You'll notice that adding the data-source-name parameter to the panel caused the template expansion
-to occur at the panel level and you now have two panels, one for each data source.
+You'll notice that adding the repeat=node to the panel caused the panel to repeat
+for every data source, and you now have two panels.
 
 
 

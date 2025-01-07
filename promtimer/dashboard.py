@@ -57,36 +57,13 @@ def make_dashboard_part(part_meta, template_params, sub_part_function=None):
         p for p in template_params if
         templating.find_parameter(part_template, p['type']) >= 0]
 
-    combinations = get_all_param_value_combinations(template_params_to_expand)
     result = []
-    logging.debug('part_template:{}'.format(part_template))
-    logging.debug('template_params:{}'.format(template_params))
-    logging.debug('combinations:{}'.format(combinations))
-    if combinations:
-        for combination in combinations:
-            replacements = {}
-            sub_template_params = template_params[:]
-            for param in combination:
-                param_type = param['type']
-                param_value = param['value']
-                replacements[param_type] = param_value
-                idx = util.index(sub_template_params, lambda x: x['type'] == param_type)
-                sub_template_params[idx] = {'type': param_type, 'values': [param_value]}
-            logging.debug('replacements:{}'.format(replacements))
-            logging.debug('sub_template_params:{}'.format(sub_template_params))
-            part_string = templating.replace(part_template, replacements)
-            part = json.loads(part_string)
-            if sub_part_function:
-                sub_part_function(part, part_meta, sub_template_params)
-            if part not in result:
-                result.append(part)
-    else:
-        part_string = templating.replace(part_template, {})
-        part = json.loads(part_string)
-        if sub_part_function:
-            sub_part_function(part, part_meta, template_params)
-        if part not in result:
-            result.append(part)
+    part_string = templating.replace(part_template, {})
+    part = json.loads(part_string)
+    if sub_part_function:
+        sub_part_function(part, part_meta, template_params)
+    if part not in result:
+        result.append(part)
     return result
 
 
